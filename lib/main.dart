@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:store_app/cubit/cubit.dart';
 import 'package:store_app/cubit/states.dart';
+import 'package:store_app/screens/category_screen.dart';
+import 'package:store_app/screens/electornics.dart';
 import 'package:store_app/screens/home.dart';
-import 'package:store_app/screens/update_product.dart';
+import 'package:store_app/screens/jewlery.dart';
+import 'package:store_app/screens/mens_clothes.dart';
+import 'package:store_app/screens/on_boarding.dart';
+
 import 'package:store_app/screens/start.dart';
+import 'package:store_app/screens/womens_clothes.dart';
 
 import 'cubit/bloc_observer.dart';
 void main() {
@@ -22,55 +29,55 @@ class StoreApp extends StatelessWidget {
       providers: [
 
         BlocProvider(
-          create: (BuildContext context) =>storecubit(),
+          create: (BuildContext context) =>StoreCubit(),
 
         ),
       ],
-     child: BlocConsumer<storecubit, storestates>(
+     child: MaterialApp(
+         theme: ThemeData(
+           primarySwatch: Colors.grey,
+           scaffoldBackgroundColor: Colors.white,
+           appBarTheme: const AppBarTheme(
+             titleSpacing: 20.0,
 
-        listener: (context,state){},
-      builder: (context,state){
-          return MaterialApp(
-              theme: ThemeData(
-                primarySwatch: Colors.grey,
-                scaffoldBackgroundColor: Colors.white,
-                appBarTheme: const AppBarTheme(
-                  titleSpacing: 20.0,
+             backgroundColor: Colors.white,
+             elevation: 0.0,
+             titleTextStyle: TextStyle(
+               color: Colors.black,
+               fontSize: 20.0,
+               fontWeight: FontWeight.bold,
+             ),
+             iconTheme: IconThemeData(
+               color: Colors.black,
+             ),
+           ),
+           floatingActionButtonTheme: FloatingActionButtonThemeData(
+             backgroundColor:HexColor('#FF850409'),
+           ),
+           bottomNavigationBarTheme:  BottomNavigationBarThemeData(
+             type: BottomNavigationBarType.fixed,
+             selectedItemColor: HexColor('#FF850409'),
+             unselectedItemColor: Colors.grey,
+             elevation: 20.0,
+             backgroundColor: Colors.white,
+           ),
 
-                  backgroundColor: Colors.white,
-                  elevation: 0.0,
-                  titleTextStyle: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  iconTheme: IconThemeData(
-                    color: Colors.black,
-                  ),
-                ),
-                floatingActionButtonTheme: const FloatingActionButtonThemeData(
-                  backgroundColor: Colors.purple,
-                ),
-                bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-                  type: BottomNavigationBarType.fixed,
-                  selectedItemColor: Colors.purple,
-                  unselectedItemColor: Colors.grey,
-                  elevation: 20.0,
-                  backgroundColor: Colors.white,
-                ),
+         ),
 
-              ),
+         debugShowCheckedModeBanner: false,
+         routes: {
+           start.id: (context) => start(),
+           HomePage.id: (context) => HomePage(),
+           WomenPage.id: (context) => WomenPage(),
+           MenPage.id: (context) => MenPage(),
+           jeweleryPage.id: (context) => jeweleryPage(),
+           electronicsPage.id: (context) => electronicsPage(),
+           CategoryScreen.id: (context) => CategoryScreen(),
+           OnboardingScreen.id: (context) => OnboardingScreen(),
 
-              debugShowCheckedModeBanner: false,
-              routes: {
-                start.id:(context) =>start(),
-                HomePage.id:(context) =>HomePage(),
-                UpdateProductPage.id : (context) =>UpdateProductPage()
-              },
-              initialRoute:start.id
-          );
-      },
-    ),
+         },
+         initialRoute: OnboardingScreen.id
+     ),
     );
 
   }
