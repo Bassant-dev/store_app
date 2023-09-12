@@ -1,9 +1,13 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:store_app/models/product_model.dart';
-import 'package:store_app/services/get_all_product_services.dart';
-import 'package:store_app/widget/custom_card.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import '../cubit/cubit.dart';
+import '../cubit/states.dart';
+import '../models/product_model.dart';
+import '../services/get_all_product_services.dart';
+import '../widget/custom_card.dart';
 
 List<String> images = [
   'assets/img/slid1.jpeg',
@@ -52,41 +56,25 @@ class HomePage extends StatelessWidget {
             SizedBox(height: 30,),
             Padding(
               padding: const EdgeInsets.only(left: 16, right: 16, top: 20),
-              child: FutureBuilder<List<ProductModel>>(
-                future: AllProductsService().getAllProducts(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(
-                      child: CircularProgressIndicator(color: HexColor('#FF850409')),
-                    );
-                  } else if (snapshot.hasError) {
-                    return Center(
-                      child: Text('Error: ${snapshot.error}'),
-                    );
-                  } else if (!snapshot.hasData || snapshot.data == null) {
-                    return Center(
-                      child: Text('No data available'),
-                    );
-                  } else {
-                    List<ProductModel> products = snapshot.data!;
-                    return SingleChildScrollView( // Wrap GridView.builder with SingleChildScrollView
-                      child: GridView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(), // Disable GridView scrolling
-                        itemCount: products.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          childAspectRatio: 1.5,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 100,
-                        ),
-                        itemBuilder: (context, index) {
-                          return CustomCard(product: products[index]);
-                        },
+              child:  SingleChildScrollView( // Wrap GridView.builder with SingleChildScrollView
+                child: BlocBuilder<StoreCubit, storestates>(
+                  builder: (context, state){
+                    return  GridView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(), // Disable GridView scrolling
+                      itemCount: BlocProvider.of<StoreCubit>(context).products.length,
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 1.5,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 100,
                       ),
+                      itemBuilder: (context, index) {
+                        return CustomCard(product: BlocProvider.of<StoreCubit>(context).products[index],);
+                      },
                     );
-                  }
-                },
+                  },
+                ),
               ),
             ),
           ],

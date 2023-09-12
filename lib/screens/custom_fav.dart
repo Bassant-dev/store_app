@@ -5,8 +5,8 @@ import 'package:store_app/models/product_model.dart';
 import '../cubit/cubit.dart';
 import '../cubit/states.dart';
 
-class CustomCard extends StatelessWidget {
-  CustomCard({
+class Customfav extends StatelessWidget {
+  Customfav({
     required this.product,
     Key? key,
   }) : super(key: key);
@@ -19,7 +19,7 @@ class CustomCard extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         final cubit = StoreCubit.get(context);
-       // final isFavorite = cubit.isProductFavorite(product);
+        // final isFavorite = cubit.isProductFavorite(product);
 
         return GestureDetector(
           onTap: () {
@@ -34,7 +34,7 @@ class CustomCard extends StatelessWidget {
                     blurRadius: 50,
                     color: Colors.grey.withOpacity(.1),
                     spreadRadius: 20,
-                    offset: const Offset(10, 10),
+                    offset: Offset(10, 10),
                   ),
                 ]),
                 child: Card(
@@ -69,17 +69,18 @@ class CustomCard extends StatelessWidget {
                                 fontSize: 16,
                               ),
                             ),
-                            IconButton(
-                              onPressed: () {
-                                cubit.isProductFavorite(product);
-                                 print(cubit.favoriteProductIds.length);
-                              },
-                              icon: Icon(
-                                product.fav
-                                    ? Icons.favorite
-                                    : Icons.favorite_border,
-                                color: product.fav ? Colors.red : null,
-                              ),
+                BlocBuilder<StoreCubit, storestates>(
+                  builder: (context, state){return IconButton(
+                    onPressed: () {
+                     cubit.delete(product);
+                    },
+                    icon: Icon(
+                      Icons.delete,
+                      size: 40,
+                      color: Colors.red ,
+                    ),
+                  ); },
+
                             ),
 
                           ],
@@ -91,11 +92,11 @@ class CustomCard extends StatelessWidget {
                 ),
               ),
               Positioned(
-                right: -7,
-                top: -50,
+                right:80,
+                top: 0,
                 child: Image.network(
                   product.image,
-                  height: 90,
+                  height: 115,
                   width: 90,
                 ),
               )

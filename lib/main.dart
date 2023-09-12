@@ -29,55 +29,60 @@ class StoreApp extends StatelessWidget {
       providers: [
 
         BlocProvider(
-          create: (BuildContext context) =>StoreCubit(),
+          create: (BuildContext context) =>StoreCubit()..gethome(),
 
         ),
       ],
-     child: MaterialApp(
-         theme: ThemeData(
-           primarySwatch: Colors.grey,
-           scaffoldBackgroundColor: Colors.white,
-           appBarTheme: const AppBarTheme(
-             titleSpacing: 20.0,
+     child: BlocConsumer<StoreCubit, storestates>(
 
-             backgroundColor: Colors.white,
-             elevation: 0.0,
-             titleTextStyle: TextStyle(
-               color: Colors.black,
-               fontSize: 20.0,
-               fontWeight: FontWeight.bold,
-             ),
-             iconTheme: IconThemeData(
-               color: Colors.black,
-             ),
-           ),
-           floatingActionButtonTheme: FloatingActionButtonThemeData(
-             backgroundColor:HexColor('#FF850409'),
-           ),
-           bottomNavigationBarTheme:  BottomNavigationBarThemeData(
-             type: BottomNavigationBarType.fixed,
-             selectedItemColor: HexColor('#FF850409'),
-             unselectedItemColor: Colors.grey,
-             elevation: 20.0,
-             backgroundColor: Colors.white,
-           ),
+        listener: (context,state){},
+      builder: (context,state){
+          return MaterialApp(
+              theme: ThemeData(
+                primarySwatch: Colors.grey,
+                scaffoldBackgroundColor: Colors.white,
+                appBarTheme: const AppBarTheme(
+                  titleSpacing: 20.0,
+                  backgroundColor: Colors.white,
+                  elevation: 0.0,
+                  titleTextStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  iconTheme: IconThemeData(
+                    color: Colors.black,
+                  ),
+                ),
+                floatingActionButtonTheme: FloatingActionButtonThemeData(
+                  backgroundColor:HexColor('#FF850409'),
+                ),
+                bottomNavigationBarTheme:  BottomNavigationBarThemeData(
+                  type: BottomNavigationBarType.fixed,
+                  selectedItemColor: HexColor('#FF850409'),
+                  unselectedItemColor: Colors.grey,
+                  elevation: 20.0,
+                  backgroundColor: Colors.white,
+                ),
 
-         ),
+              ),
 
-         debugShowCheckedModeBanner: false,
-         routes: {
-           start.id: (context) => start(),
-           HomePage.id: (context) => HomePage(),
-           WomenPage.id: (context) => WomenPage(),
-           MenPage.id: (context) => MenPage(),
-           jeweleryPage.id: (context) => jeweleryPage(),
-           electronicsPage.id: (context) => electronicsPage(),
-           CategoryScreen.id: (context) => CategoryScreen(),
-           OnboardingScreen.id: (context) => OnboardingScreen(),
+              debugShowCheckedModeBanner: false,
+              routes: {
+                start.id: (context) => start(),
+                HomePage.id: (context) => HomePage(),
+                WomenPage.id: (context) => WomenPage(),
+                MenPage.id: (context) => MenPage(),
+                jeweleryPage.id: (context) => jeweleryPage(),
+                electronicsPage.id: (context) => electronicsPage(),
+                CategoryScreen.id: (context) => CategoryScreen(),
+                OnboardingScreen.id: (context) => OnboardingScreen(),
 
-         },
-         initialRoute: OnboardingScreen.id
-     ),
+              },
+              initialRoute: OnboardingScreen.id
+          );
+      },
+    ),
     );
 
   }

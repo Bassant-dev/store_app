@@ -1,3 +1,5 @@
+
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,26 +9,37 @@ import 'package:store_app/screens/home.dart';
 import 'package:store_app/screens/favourite_screen.dart';
 import 'package:store_app/screens/category_screen.dart';
 
+import '../services/get_all_product_services.dart';
+
 class StoreCubit extends Cubit<storestates> {
   StoreCubit() : super(NewsInitialStates());
 
-  List<int> favoriteProductIds = [];
+  List<ProductModel> favoriteProductIds = [];
   List<ProductModel> products = [];
 
 
-  void setProducts(List<ProductModel> productList) {
-    products = productList;
+
+  Future<List<ProductModel>> gethome() async {
+    products= await AllProductsService().getAllProducts();
+    return products;
   }
-  void toggleProductFavorite(int productId) {
-    if (favoriteProductIds.contains(productId)) {
+  void delete(ProductModel productd) {
+
+    favoriteProductIds.remove(productd);
+    emit(RemovedSuccessfully());
+  }
+
+  bool isProductFavorite(ProductModel productId) {
+    productId.fav=!productId.fav;
+    if(!productId.fav && favoriteProductIds.contains(productId)){
       favoriteProductIds.remove(productId);
-    } else {
+    }
+    if(productId.fav){
       favoriteProductIds.add(productId);
     }
     emit(FavoritesState(favoriteProductIds));
-  }
-  bool isProductFavorite(int productId) {
-    return favoriteProductIds.contains(productId);
+    return productId.fav;
+
   }
 
 

@@ -49,7 +49,7 @@ class electronicsPage extends StatelessWidget {
                   mainAxisSpacing: 100,
                 ),
                 itemBuilder: (context, index) {
-                  return CustomCard(product: products[index]);
+                  return CustomCard(product: products[index],);
                 },
               );
             }
