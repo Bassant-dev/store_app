@@ -27,7 +27,8 @@ class WomenPage extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
-                child: CircularProgressIndicator(),
+
+                child: CircularProgressIndicator(color: HexColor('#FF850409')),
               );
             } else if (snapshot.hasError) {
               return Center(
