@@ -31,18 +31,18 @@ class CustomCard extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(boxShadow: [
                   BoxShadow(
-                    blurRadius: 50,
-                    color: Colors.grey.withOpacity(.1),
+                   // blurRadius: 50,
+                    color: Colors.white,
                     spreadRadius: 20,
                     offset: const Offset(10, 10),
                   ),
                 ]),
                 child: Card(
-                  color: Colors.grey[300],
+                  color: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  elevation: 10,
+
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 16, vertical: 16),
@@ -91,12 +91,17 @@ class CustomCard extends StatelessWidget {
                 ),
               ),
               Positioned(
-                right: -7,
-                top: -50,
-                child: Image.network(
-                  product.image,
-                  height: 90,
-                  width: 90,
+                right: 33,
+                top: 15,
+                child: CircleAvatar(
+                  radius: 60,
+                  backgroundColor: Colors.white70,
+                  child: Image.network(
+
+                    product.image,
+                    height: 90,
+                    width: 90,
+                  ),
                 ),
               )
             ],

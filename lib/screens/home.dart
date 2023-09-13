@@ -59,19 +59,22 @@ class HomePage extends StatelessWidget {
               child:  SingleChildScrollView( // Wrap GridView.builder with SingleChildScrollView
                 child: BlocBuilder<StoreCubit, storestates>(
                   builder: (context, state){
-                    return  GridView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(), // Disable GridView scrolling
-                      itemCount: BlocProvider.of<StoreCubit>(context).products.length,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 1.5,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 100,
+                    return  Container(
+                      child: GridView.builder(
+
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(), // Disable GridView scrolling
+                        itemCount: BlocProvider.of<StoreCubit>(context).products.length,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: .8,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 50,
+                        ),
+                        itemBuilder: (context, index) {
+                          return CustomCard(product: BlocProvider.of<StoreCubit>(context).products[index],);
+                        },
                       ),
-                      itemBuilder: (context, index) {
-                        return CustomCard(product: BlocProvider.of<StoreCubit>(context).products[index],);
-                      },
                     );
                   },
                 ),

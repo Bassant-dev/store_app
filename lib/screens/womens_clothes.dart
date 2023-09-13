@@ -45,9 +45,9 @@ class WomenPage extends StatelessWidget {
                 clipBehavior: Clip.none,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 1.5,
+                  childAspectRatio: .8,
                   crossAxisSpacing: 10,
-                  mainAxisSpacing: 100,
+                  mainAxisSpacing: 50,
                 ),
                 itemBuilder: (context, index) {
                   return CustomCard(product: products[index], );

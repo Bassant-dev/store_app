@@ -13,17 +13,17 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final List<OnboardingItem> items = [
     OnboardingItem(
-      image: 'assets/img/on_boarding1.PNG',
+      image: 'assets/img/on1.png',
       title: 'Welcome to Our Store',
       description: 'Explore a wide range of products and more.',
     ),
     OnboardingItem(
-      image: 'assets/img/on_boarding2.PNG',
+      image: 'assets/img/on2.png',
       title: 'Shop with Confidence',
       description: 'We provide secure and convenient shopping.',
     ),
     OnboardingItem(
-      image: 'assets/img/on_boarding3.PNG',
+      image: 'assets/img/on3.png',
       title: 'Get Started Now',
       description: 'Create an account and start shopping today!',
     ),

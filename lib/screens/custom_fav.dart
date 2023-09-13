@@ -38,11 +38,11 @@ class Customfav extends StatelessWidget {
                   ),
                 ]),
                 child: Card(
-                  color: Colors.grey[300],
+                  color: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  elevation: 10,
+
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 16, vertical: 16),
@@ -94,10 +94,14 @@ class Customfav extends StatelessWidget {
               Positioned(
                 right:80,
                 top: 0,
-                child: Image.network(
-                  product.image,
-                  height: 115,
-                  width: 90,
+                child:CircleAvatar(
+                  radius: 60,
+                  backgroundColor: Colors.white70,
+                  child: Image.network(
+                    product.image,
+                    height: 115,
+                    width: 90,
+                  ),
                 ),
               )
             ],
